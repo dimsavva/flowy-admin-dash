@@ -1,14 +1,12 @@
 
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ChartData {
@@ -55,32 +53,43 @@ const data: ChartData[] = [
   },
 ];
 
+const formatCurrency = (value: number) => {
+  return new Intl.NumberFormat('en-ZA', {
+    style: 'currency',
+    currency: 'ZAR',
+    minimumFractionDigits: 0,
+  }).format(value);
+};
+
 const SimpleBarChart = () => {
   return (
     <Card className="col-span-2">
       <CardHeader>
         <CardTitle>Monthly Performance</CardTitle>
       </CardHeader>
-      <CardContent className="h-[340px]">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="revenue" fill="#3b82f6" name="Revenue" />
-            <Bar dataKey="profit" fill="#8b5cf6" name="Profit" />
-          </BarChart>
-        </ResponsiveContainer>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Month</TableHead>
+              <TableHead>Revenue</TableHead>
+              <TableHead>Profit</TableHead>
+              <TableHead>Profit Margin</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((month) => (
+              <TableRow key={month.name}>
+                <TableCell className="font-medium">{month.name}</TableCell>
+                <TableCell>{formatCurrency(month.revenue)}</TableCell>
+                <TableCell>{formatCurrency(month.profit)}</TableCell>
+                <TableCell>
+                  {Math.round((month.profit / month.revenue) * 100)}%
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </CardContent>
     </Card>
   );
