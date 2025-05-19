@@ -10,7 +10,10 @@ const Login = () => {
     // Check if user is already logged in
     const adminUser = localStorage.getItem("adminUser");
     if (adminUser) {
-      navigate("/dashboard");
+      // Prevent redirect loop by checking the referrer
+      if (!document.referrer.includes('/dashboard')) {
+        navigate("/dashboard");
+      }
     }
   }, [navigate]);
 

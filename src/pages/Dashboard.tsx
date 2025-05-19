@@ -12,18 +12,27 @@ import { BarChart3, Users, ShoppingBag, DollarSign } from "lucide-react";
 const Dashboard = () => {
   const navigate = useNavigate();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Check if user is logged in
     const adminUser = localStorage.getItem("adminUser");
     if (!adminUser) {
-      navigate("/");
+      navigate("/login");
+    } else {
+      setIsLoading(false);
     }
   }, [navigate]);
 
   const toggleSidebar = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
+
+  if (isLoading) {
+    return <div className="min-h-screen flex items-center justify-center bg-admin-background">
+      <p className="text-xl">Loading dashboard...</p>
+    </div>;
+  }
 
   return (
     <div className="min-h-screen bg-admin-background">
