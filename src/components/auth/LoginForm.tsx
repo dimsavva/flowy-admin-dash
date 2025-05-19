@@ -12,8 +12,8 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: 'admin@example.com',
+    password: 'password123',
   });
   const [errors, setErrors] = useState({
     email: '',
