@@ -55,7 +55,7 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <StatCard 
               title="Total Revenue" 
-              value="$45,231.89" 
+              value="R 45,231.89" 
               icon={<DollarSign size={18} />}
               description="From all products this month" 
               change={{ value: 12.5, positive: true }}
