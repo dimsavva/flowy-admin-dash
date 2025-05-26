@@ -51,12 +51,12 @@ const DashboardHeader = ({ onMenuToggle }: DashboardHeaderProps) => {
             variant="ghost"
             size="icon"
             onClick={onMenuToggle}
-            className="mr-4 md:hidden"
+            className="mr-4"
           >
             <Menu className="h-5 w-5" />
           </Button>
           <div className="hidden md:flex items-center">
-            <h1 className="text-xl font-bold text-admin-foreground">Admin Dashboard</h1>
+            <h1 className="text-xl font-bold text-admin-foreground">Dashboard</h1>
           </div>
         </div>
 
