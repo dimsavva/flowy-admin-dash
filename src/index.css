@@ -34,21 +34,21 @@
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 0 0% 100%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-foreground: 215 25% 27%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 217 91% 60%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 100%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent: 210 40% 96%;
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-accent-foreground: 215 25% 27%;
 
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 214 32% 91%;
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 217 91% 60%;
   }
 
   .dark {
@@ -97,5 +97,18 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Mobile sidebar solid background fix */
+@layer components {
+  [data-sidebar="sidebar"][data-mobile="true"] {
+    @apply bg-white !important;
+    background-color: white !important;
+  }
+  
+  .dark [data-sidebar="sidebar"][data-mobile="true"] {
+    @apply bg-gray-900 !important;
+    background-color: rgb(17, 24, 39) !important;
   }
 }

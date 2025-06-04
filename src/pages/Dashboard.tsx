@@ -1,12 +1,12 @@
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardHeader from "@/components/layout/DashboardHeader";
-import Sidebar from "@/components/layout/Sidebar";
+import AppSidebar from "@/components/layout/Sidebar";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -19,28 +19,21 @@ const Dashboard = () => {
     }
   }, [navigate]);
 
-  const toggleSidebar = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
-  };
-
   if (isLoading) {
-    return <div className="min-h-screen flex items-center justify-center bg-admin-background">
-      <p className="text-xl">Loading dashboard...</p>
-    </div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-admin-background">
+        <p className="text-xl">Loading dashboard...</p>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-admin-background">
-      <Sidebar isCollapsed={sidebarCollapsed} />
-      
-      <div 
-        className={`transition-all duration-300 ${
-          sidebarCollapsed ? "pl-16" : "pl-64"
-        }`}
-      >
-        <DashboardHeader onMenuToggle={toggleSidebar} />
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <DashboardHeader onMenuToggle={() => {}} />
         
-        <main className="p-4 md:p-6">
+        <main className="flex-1 p-4 md:p-6 bg-admin-background">
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="text-center">
               <h1 className="text-4xl font-bold text-gray-800 mb-4">Welcome to Your App</h1>
@@ -53,8 +46,8 @@ const Dashboard = () => {
             </div>
           </div>
         </main>
-      </div>
-    </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };
 
